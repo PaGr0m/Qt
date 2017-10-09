@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/StarWars">
+        <file>Sprites/Test_1.png</file>
+    </qresource>
+</RCC>
