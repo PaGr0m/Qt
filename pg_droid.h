@@ -1,30 +1,34 @@
 #ifndef PG_DROID_H
 #define PG_DROID_H
 
-//#include <QObject>
-
 #include "pg_sprite.h"
 
 class PG_Droid : public PG_Sprite
 {
-    Q_OBJECT
 public:
     explicit PG_Droid(PG_Sprite *parent = nullptr);
 
-signals:
+private:
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+    virtual void frameLeft();
+    virtual void frameRight();
 
 protected:
-    int frameCurrent;
-    const int frameCenter = 288;
+    // параметры спрайта
+    const int startX = 50;
     const int frameHeight = 53;
     const int frameWidth = 36;
-    const int frameMax = 576;
-    const int frameMin = 0;
-    const int frameMiddle = 288;
-    const int offset = 10;
+    const int spriteSpeed = 10;
 
-    QPoint pointCenter;
+    // количество спрайтов для движения
+    int countStepLeft;
+    int countStepRight;
+
+    // вектор и пути
     QVector<QPixmap *> spriteVector;
+    QString pathToStepLeft = ":/StarWars/Sprites/Test_1.png";
+    QString pathToStepRight = ":/StarWars/Sprites/Test_1.png";
 };
 
 #endif // PG_DROID_H

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,12 +27,16 @@ SOURCES += \
         main.cpp \
         gamewindow.cpp \
     pg_sprite.cpp \
-    pg_droid.cpp
+    pg_droid.cpp \
+    pg_stormtrooper.cpp \
+    pg_bullet.cpp
 
 HEADERS += \
         gamewindow.h \
     pg_sprite.h \
-    pg_droid.h
+    pg_droid.h \
+    pg_stormtrooper.h \
+    pg_bullet.h
 
 FORMS += \
         gamewindow.ui

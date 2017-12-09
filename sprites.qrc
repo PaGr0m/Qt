@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/StarWars">
         <file>Sprites/Test_1.png</file>
+        <file>Sprites/Test_2.png</file>
+        <file>Sprites/sprite_sheet.png</file>
+        <file>Sprites/SW.mp3</file>
     </qresource>
 </RCC>

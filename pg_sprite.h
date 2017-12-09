@@ -5,40 +5,36 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-
 class PG_Sprite : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
     explicit PG_Sprite(QObject *parent = nullptr);
-    static PG_Sprite& getInstance();
 
 private:
-    //***
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     QRectF boundingRect() const override;
-    //***
 
 public:
     virtual void frameLeft();
     virtual void frameRight();
+    virtual void shoot(bool side);
+
+    int getX();
 
 protected:
-    QVector<QPixmap *> spriteVector;
+    int spriteCurrent;
 
-    int frameCurrent;
-    int frameCenter;
-    int frameHeight;
-    int frameWidth;
-    int frameMax;
-    int frameMin;
-    int frameMiddle;
-    int offset;
+    const int startY = 250;
+
+    // границы экрана
+    const int windowBorderLeft = 0;
+    const int windowBorderRight = 600;
+
     QPoint pointCenter;
-
-    QTimer *timer;
     QPixmap *spriteImage;
-    QRectF gameRectangle{0, 0, 700, 400};
+    QRectF gameRectangle {0, 0, 700, 400};
+    QVector<QPixmap *> spriteVector;
 };
 
 #endif // PG_SPRITE_H

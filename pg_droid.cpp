@@ -1,19 +1,53 @@
 #include "pg_droid.h"
+#include <QDebug>
 
 PG_Droid::PG_Droid(PG_Sprite *parent) : PG_Sprite(parent)
 {
-    pointCenter.setX(0);
-    pointCenter.setY(50);
+    pointCenter.setX(startX);
+    pointCenter.setY(startY);
+    spriteCurrent = 0;
 
-    spriteImage = new QPixmap(":/StarWars/Sprites/Test_1.png");
+    spriteImage = new QPixmap(pathToStepLeft);
 
-    for (int i = 0; i < 12; i++)
+    for (int x = 0; x < spriteImage->width(); x += frameWidth)
     {
-
-        spriteVector += spriteImage->
-                new QPixmap(0,0,10,10);
+        QPixmap tempPix = spriteImage->copy(x, 0, frameWidth, frameHeight);
+        spriteVector.append(new QPixmap(tempPix));
     }
 
-    frameCurrent = frameCenter;
+    countStepLeft = spriteVector.count();
+    countStepRight = spriteVector.count();
+}
 
+void PG_Droid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->drawPixmap(pointCenter.x(),
+                        pointCenter.y(),
+                        *spriteVector.at(spriteCurrent));
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+}
+
+void PG_Droid::frameLeft()
+{
+    if (spriteCurrent > countStepLeft)
+        spriteCurrent = 0;
+    else spriteCurrent ++;
+
+    if (pointCenter.x() > windowBorderLeft)
+        pointCenter.setX(pointCenter.x() - spriteSpeed);
+
+    this->update(gameRectangle);
+}
+
+void PG_Droid::frameRight()
+{
+    if (spriteCurrent > countStepRight)
+        spriteCurrent = 0;
+    else spriteCurrent ++;
+
+    if (pointCenter.x() < windowBorderRight)
+        pointCenter.setX(pointCenter.x() + spriteSpeed);
+
+    this->update(gameRectangle);
 }

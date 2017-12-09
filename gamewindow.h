@@ -6,6 +6,8 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include <QTimer>
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 
 #include "pg_sprite.h"
 
@@ -25,16 +27,29 @@ public:
     void keyReleaseEvent(QKeyEvent *event);
     void timerEvent(QTimerEvent *);
 
+    void checkBullet();
+    void createBullet();
+    void music();
+
 private:
     Ui::GameWindow *ui;
 
     QGraphicsScene *scene;
-    QTimer *timer;
-
     QMap <int, bool> keyboardKeys;
 
+    // спрайты
     PG_Sprite *droid;
     PG_Sprite *stormTrooper;
+    QVector<PG_Sprite *> bullets;
+
+    // музыка
+    QMediaPlayer *media_player;
+    QMediaPlaylist *media_playlist;
+
+    // границы экрана
+    const int windowBorderLeft = 0;
+    const int windowBorderRight = 600;
+
 };
 
 #endif // GAMEWINDOW_H
