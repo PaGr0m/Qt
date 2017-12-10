@@ -15,27 +15,22 @@ private:
     virtual void frameLeft();
     virtual void frameRight();
 
+    QVector<QPixmap *> loadVector(QString path);
+
 protected:
-    int frameCurrent;
-    int copyX = 0;
-//    int copyY = 0;
-//    int copyWidth = 0;
-//    int copyHeight = 0;
+    // параметры спрайта
+    const int startX = 600;
+    const int frameHeight = 58; // y
+    const int frameWidth = 45;  // x
+    const int spriteSpeed = 10;
 
-    const int frameCenter = 288;
-    const int frameHeight = 58;
-    const int frameWidth = 43;
-    const int frameMax = 576;
-    const int frameMin = 0;
-    const int frameMiddle = 288;
-    const int offset = 10;
-
-    QPixmap qwe;
-    QPoint pointCenter;
-    QVector<QPixmap *> spriteVector;
-
-    const int startX = 650 - frameWidth;
-    int countFrame;
+    // вектор и пути
+    QPixmap *tempSpriteImage;
+    QPixmap *outputSprite;
+    QVector<QPixmap *> vectorStepLeft;
+    QVector<QPixmap *> vectorStepRight;
+    QString pathToFileStepLeft = ":/StarWars/Resourses/StormTrooper/StepLeft.png";
+    QString pathToFileStepRight = ":/StarWars/Resourses/StormTrooper/StepRight.png";
 };
 
 #endif // PG_STORMTROOPER_H

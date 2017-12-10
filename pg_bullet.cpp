@@ -8,9 +8,7 @@ PG_Bullet::PG_Bullet(int x)
     pointCenter.setX(x);
     pointCenter.setY(startY);
 
-    spriteCurrent = 0;
-
-    spriteImage = new QPixmap(":/StarWars/Sprites/sprite_sheet.png");
+    tempSpriteImage = new QPixmap(pathToFileBullet);
 }
 
 void PG_Bullet::shoot(bool side)
@@ -27,8 +25,7 @@ void PG_Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 {
     painter->drawPixmap(pointCenter.x(),
                         pointCenter.y(),
-                        *spriteImage);
-//                        *spriteVector.at(spriteCurrent));
+                        *tempSpriteImage);
     Q_UNUSED(option);
     Q_UNUSED(widget);
 }

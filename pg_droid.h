@@ -14,21 +14,22 @@ private:
     virtual void frameLeft();
     virtual void frameRight();
 
+    QVector<QPixmap *> loadVector(QString path);
+
 protected:
     // параметры спрайта
     const int startX = 50;
-    const int frameHeight = 53;
-    const int frameWidth = 36;
+    const int frameHeight = 53; // y
+    const int frameWidth = 36;  // x
     const int spriteSpeed = 10;
 
-    // количество спрайтов для движения
-    int countStepLeft;
-    int countStepRight;
-
     // вектор и пути
-    QVector<QPixmap *> spriteVector;
-    QString pathToStepLeft = ":/StarWars/Sprites/Test_1.png";
-    QString pathToStepRight = ":/StarWars/Sprites/Test_1.png";
+    QPixmap *tempSpriteImage;
+    QPixmap *outputSprite;
+    QVector<QPixmap *> vectorStepLeft;
+    QVector<QPixmap *> vectorStepRight;
+    QString pathToFileStepLeft = ":/StarWars/Resourses/Droid/StepLeft.png";
+    QString pathToFileStepRight = ":/StarWars/Resourses/Droid/StepRight.png";
 };
 
 #endif // PG_DROID_H

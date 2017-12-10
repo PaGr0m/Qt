@@ -13,19 +13,18 @@ private:
 
 public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
     virtual void shoot(bool side);
 
 protected:
-    QVector<QPixmap *> spriteVector;
-    QTimer *timer;
+    // параметры спрайта
+    const int frameHeight = 176; // y
+    const int frameWidth = 114;  // x
+    const int bulletSpeed = 11;
+    const int startY = 270;
 
-    const int bulletSpeed = 1;
-
-    const int frameHeight = 200;
-    const int frameWidth = 20;
-
-    QString pathToFile =
+    // вектор и путь
+    QVector<QPixmap *> vectorBullet;
+    QString pathToFileBullet = ":/StarWars/Resourses/Bullet/LaserBlue.png";
 };
 
 #endif // PG_BULLET_H

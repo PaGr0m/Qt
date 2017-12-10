@@ -3,51 +3,69 @@
 
 PG_StormTrooper::PG_StormTrooper(PG_Sprite *parent) : PG_Sprite(parent)
 {
-    spriteCurrent = 0;
     pointCenter.setX(startX);
     pointCenter.setY(startY);
 
-    spriteImage = new QPixmap(":/StarWars/Sprites/Test_2.png");
+    currentStepLeft = 0;
+    currentStepRight = 0;
 
-    for (int i = 0; i < 12; i++)
-    {
-        QPixmap tpix = spriteImage->copy(copyX, 0, frameWidth, frameHeight);
-        spriteVector.append(new QPixmap(tpix));
-        this->copyX += frameWidth;
 
-        qDebug() << spriteVector.at(i);
-    }
+    vectorStepLeft = loadVector(pathToFileStepLeft);
+    vectorStepRight = loadVector(pathToFileStepRight);
 
-    countFrame = spriteVector.count();
+    countStepLeft = vectorStepLeft.count();
+    countStepRight = vectorStepRight.count();
+
+    outputSprite = vectorStepLeft.at(0);
 }
 
 void PG_StormTrooper::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawPixmap(pointCenter.x(),
                         pointCenter.y(),
-                        *spriteVector.at(spriteCurrent));
+                        *outputSprite);
     Q_UNUSED(option);
     Q_UNUSED(widget);
 }
 
 void PG_StormTrooper::frameLeft()
 {
-    if (spriteCurrent >= countFrame/2 /*5*/) spriteCurrent = 0;
-    else spriteCurrent ++;
+    if (currentStepLeft == countStepLeft - 1)
+        currentStepLeft = 0;
+    else currentStepLeft ++;
 
-    if (pointCenter.x() > 0)
-        pointCenter.setX(pointCenter.x() - offset);
+    if (pointCenter.x() > windowBorderLeft)
+        pointCenter.setX(pointCenter.x() - spriteSpeed);
+
+    outputSprite = vectorStepLeft.at(currentStepLeft);
 
     this->update(gameRectangle);
 }
 
 void PG_StormTrooper::frameRight()
 {
-    if (spriteCurrent < countFrame/2 || spriteCurrent == countFrame/2 - 1) spriteCurrent = countFrame/2 + 1;
-    else spriteCurrent ++;
+    if (currentStepRight == countStepRight - 1)
+        currentStepRight = 0;
+    else currentStepRight ++;
 
-    if (pointCenter.x() < 700 - 40)
-        pointCenter.setX(pointCenter.x() + offset);
+    if (pointCenter.x() < windowBorderRight)
+        pointCenter.setX(pointCenter.x() + spriteSpeed);
+
+    outputSprite = vectorStepRight.at(currentStepRight);
 
     this->update(gameRectangle);
+}
+
+QVector<QPixmap *> PG_StormTrooper::loadVector(QString path)
+{
+    tempSpriteImage = new QPixmap(path);
+    QVector<QPixmap *> vector;
+
+    for (int x = 0; x < tempSpriteImage->width(); x += frameWidth)
+    {
+        QPixmap tempPix = tempSpriteImage->copy(x, 0, frameWidth, frameHeight);
+        vector.append(new QPixmap(tempPix));
+    }
+
+    return vector;
 }

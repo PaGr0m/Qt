@@ -1,8 +1,10 @@
 <RCC>
     <qresource prefix="/StarWars">
-        <file>Sprites/Test_1.png</file>
-        <file>Sprites/Test_2.png</file>
-        <file>Sprites/sprite_sheet.png</file>
-        <file>Sprites/SW.mp3</file>
+        <file>Resourses/Droid/StepLeft.png</file>
+        <file>Resourses/Droid/StepRight.png</file>
+        <file>Resourses/StormTrooper/StepLeft.png</file>
+        <file>Resourses/StormTrooper/StepRight.png</file>
+        <file>Resourses/Bullet/LaserBlue.png</file>
+        <file>Resourses/Bullet/LaserRed.png</file>
     </qresource>
 </RCC>

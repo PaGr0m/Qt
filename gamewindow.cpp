@@ -50,7 +50,7 @@ void GameWindow::keyReleaseEvent(QKeyEvent *event)
 
 void GameWindow::timerEvent(QTimerEvent *)
 {
-    qDebug() << "List of keys" << keyboardKeys;
+//    qDebug() << "List of keys" << keyboardKeys;
 
     if(keyboardKeys[Qt::Key_A]) droid->frameLeft();
     if(keyboardKeys[Qt::Key_D]) droid->frameRight();

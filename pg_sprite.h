@@ -23,16 +23,24 @@ public:
     int getX();
 
 protected:
+    const int startY = 250;
     int spriteCurrent;
 
-    const int startY = 250;
+    int frameHeight;
+    int frameWidth;
+
+    // параметры вектора спрайтов
+    int countStepLeft;
+    int countStepRight;
+    int currentStepLeft;
+    int currentStepRight;
 
     // границы экрана
     const int windowBorderLeft = 0;
-    const int windowBorderRight = 600;
+    const int windowBorderRight = 700;
 
+    QPixmap *tempSpriteImage;
     QPoint pointCenter;
-    QPixmap *spriteImage;
     QRectF gameRectangle {0, 0, 700, 400};
     QVector<QPixmap *> spriteVector;
 };
