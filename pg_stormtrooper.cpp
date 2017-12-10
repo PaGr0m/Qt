@@ -9,7 +9,6 @@ PG_StormTrooper::PG_StormTrooper(PG_Sprite *parent) : PG_Sprite(parent)
     currentStepLeft = 0;
     currentStepRight = 0;
 
-
     vectorStepLeft = loadVector(pathToFileStepLeft);
     vectorStepRight = loadVector(pathToFileStepRight);
 

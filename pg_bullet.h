@@ -15,6 +15,8 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual void shoot(bool side);
 
+    void slotTimerBullet();
+
 protected:
     // параметры спрайта
     const int frameHeight = 176; // y

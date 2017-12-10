@@ -6,5 +6,9 @@
         <file>Resourses/StormTrooper/StepRight.png</file>
         <file>Resourses/Bullet/LaserBlue.png</file>
         <file>Resourses/Bullet/LaserRed.png</file>
+        <file>Resourses/Music/BackGround.jpg</file>
+        <file>Resourses/Music/Star Wars - Cantina (8-bit).mp3</file>
+        <file>Resourses/Music/Star Wars - Imperial March (8-bit).mp3</file>
+        <file>Resourses/Music/Star Wars - Main Theme (8-bit).mp3</file>
     </qresource>
 </RCC>

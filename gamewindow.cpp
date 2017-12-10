@@ -13,21 +13,28 @@ GameWindow::GameWindow(QWidget *parent) :
 
     this->resize(800, 500);
     this->setFixedSize(800, 500);
+    this->setWindowTitle("Star fighting");
 
-    droid = new PG_Droid();
-    stormTrooper = new PG_StormTrooper();
+    QPixmap pictureBackGround(pathToFileBackGround);
 
-    scene = new QGraphicsScene();
+    scene = new QGraphicsScene(0, 0, windowWidth, windowHeight);
 
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing); // сглаживание
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+    droid = new PG_Droid();
+    stormTrooper = new PG_StormTrooper();
+
     scene->addItem(droid);
     scene->addItem(stormTrooper);
-    scene->addLine(0,0, 100, 0, QPen(Qt::green));
-    scene->addRect(0, 0, 700, 400, QPen(Qt::red));
+//    scene->addLine(0,0, 100, 0, QPen(Qt::green));
+//    scene->addRect(0, 0, 700, 400, QPen(Qt::red));
+    scene->setBackgroundBrush(pictureBackGround.scaled(windowWidth,
+                                                       windowHeight,
+                                                       Qt::IgnoreAspectRatio,
+                                                       Qt::SmoothTransformation));
 
 //    music();
     startTimer(25);

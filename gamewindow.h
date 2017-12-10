@@ -36,6 +36,7 @@ private:
 
     QGraphicsScene *scene;
     QMap <int, bool> keyboardKeys;
+    QString pathToFileBackGround = ":/StarWars/Resourses/Music/BackGround.jpg";
 
     // спрайты
     PG_Sprite *droid;
@@ -49,6 +50,10 @@ private:
     // границы экрана
     const int windowBorderLeft = 0;
     const int windowBorderRight = 600;
+
+    // параметры окна
+    const int windowWidth = 800;
+    const int windowHeight = 500;
 
 };
 
