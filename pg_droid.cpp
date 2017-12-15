@@ -56,6 +56,11 @@ void PG_Droid::frameRight()
     this->update(gameRectangle);
 }
 
+bool PG_Droid::getBulletColor()
+{
+    return true;
+}
+
 QVector<QPixmap *> PG_Droid::loadVector(QString path)
 {
     tempSpriteImage = new QPixmap(path);

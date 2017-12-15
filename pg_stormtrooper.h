@@ -14,6 +14,7 @@ private:
 
     virtual void frameLeft();
     virtual void frameRight();
+    virtual bool getBulletColor();
 
     QVector<QPixmap *> loadVector(QString path);
 

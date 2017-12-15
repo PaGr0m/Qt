@@ -3,19 +3,22 @@
 
 #include <QDebug>
 
-PG_Bullet::PG_Bullet(int x)
+PG_Bullet::PG_Bullet(int x, bool side, bool color)
 {
     pointCenter.setX(x);
     pointCenter.setY(startY);
 
-    tempSpriteImage = new QPixmap(pathToFileBullet);
+    bulletSide = side;
+
+    if (color) tempSpriteImage = new QPixmap(pathToFileBulletBlue);
+    else tempSpriteImage = new QPixmap(pathToFileBulletRed);
 }
 
-void PG_Bullet::shoot(bool side)
+void PG_Bullet::shoot()
 {
-    if (side)
+    if (bulletSide)
         pointCenter.setX(pointCenter.x() + bulletSpeed);
-    else if (!side)
+    else if (!bulletSide)
         pointCenter.setX(pointCenter.x() - bulletSpeed);
 
     this->update(gameRectangle);

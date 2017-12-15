@@ -27,8 +27,9 @@ public:
     void keyReleaseEvent(QKeyEvent *event);
     void timerEvent(QTimerEvent *);
 
+    bool checkCol(QPointF person, QPointF bullet);
     void checkBullet();
-    void createBullet();
+    void createBullet(PG_Sprite *person, bool personSide);
     void music();
 
 private:
@@ -49,11 +50,22 @@ private:
 
     // границы экрана
     const int windowBorderLeft = 0;
-    const int windowBorderRight = 600;
+    const int windowBorderRight = 800;
 
     // параметры окна
     const int windowWidth = 800;
     const int windowHeight = 500;
+
+    // направление пулей
+    // true ->
+    // false <-
+    bool bulletSideDroid = true;
+    bool bulletSideStormTrooper = false;
+
+    // цвет пули
+    // true - blue
+    // false - red
+    bool bulletColor;
 
 };
 

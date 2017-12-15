@@ -25,7 +25,12 @@ void PG_Sprite::frameRight()
 
 }
 
-void PG_Sprite::shoot(bool side)
+void PG_Sprite::shoot()
+{
+
+}
+
+bool PG_Sprite::getBulletColor()
 {
 
 }

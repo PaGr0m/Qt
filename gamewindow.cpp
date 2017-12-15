@@ -29,12 +29,10 @@ GameWindow::GameWindow(QWidget *parent) :
 
     scene->addItem(droid);
     scene->addItem(stormTrooper);
-//    scene->addLine(0,0, 100, 0, QPen(Qt::green));
-//    scene->addRect(0, 0, 700, 400, QPen(Qt::red));
-    scene->setBackgroundBrush(pictureBackGround.scaled(windowWidth,
-                                                       windowHeight,
-                                                       Qt::IgnoreAspectRatio,
-                                                       Qt::SmoothTransformation));
+//    scene->setBackgroundBrush(pictureBackGround.scaled(windowWidth,
+//                                                       windowHeight,
+//                                                       Qt::IgnoreAspectRatio,
+//                                                       Qt::SmoothTransformation));
 
 //    music();
     startTimer(25);
@@ -59,23 +57,68 @@ void GameWindow::timerEvent(QTimerEvent *)
 {
 //    qDebug() << "List of keys" << keyboardKeys;
 
-    if(keyboardKeys[Qt::Key_A]) droid->frameLeft();
-    if(keyboardKeys[Qt::Key_D]) droid->frameRight();
-    if(keyboardKeys[Qt::Key_Space]) createBullet();
+    if(keyboardKeys[Qt::Key_A])
+    {
+        droid->frameLeft();
+        bulletSideDroid = false;
+    }
+    if(keyboardKeys[Qt::Key_D])
+    {
+        droid->frameRight();
+        bulletSideDroid = true;
+    }
+    if(keyboardKeys[Qt::Key_Space]) createBullet(droid, bulletSideDroid);
 
-    if(keyboardKeys[Qt::Key_4]) stormTrooper->frameLeft();
-    if(keyboardKeys[Qt::Key_6]) stormTrooper->frameRight();
-    if(keyboardKeys[Qt::Key_Control]) createBullet();
+    if(keyboardKeys[Qt::Key_4])
+    {
+        stormTrooper->frameLeft();
+        bulletSideStormTrooper = false;
+    }
+    if(keyboardKeys[Qt::Key_6])
+    {
+        stormTrooper->frameRight();
+        bulletSideStormTrooper = true;
+    }
+    if(keyboardKeys[Qt::Key_Control]) createBullet(stormTrooper, bulletSideStormTrooper);
 
+//    droid->mapRectFromItem();
     checkBullet();
+    for(auto b: bullets)
+    {
+        auto res = checkCol(stormTrooper->pos(), b->pos());
+        qDebug() << res;
+        if (res)
+        {
+//            b->deleteLater();
+//            bullets.erase(*b);
+            qDebug() << "Попал";
+        }
+    }
+
     update();
+}
+
+bool GameWindow::checkCol(QPointF person, QPointF bullet)
+{
+    if (bullet.x() == person.x())
+        return true;
+    else
+        return false;
+
+//    if (bullet.x() > person.x() &&
+//        bullet.x() < (person.x() + person.width()))
+//        return true;
+//    else if ((bullet.x() + bullet.width()) > person.x() &&
+//             (bullet.x() + bullet.width()) < (person.x() + person.width()))
+//        return true;
+//    else return false;
 }
 
 void GameWindow::checkBullet()
 {
     for(auto bullet = bullets.begin(); bullet < bullets.end(); bullet++)
     {
-        (*bullet)->shoot(true);
+        (*bullet)->shoot();
         if (((*bullet)->getX() < windowBorderLeft) ||
             ((*bullet)->getX() > windowBorderRight))
         {
@@ -85,9 +128,9 @@ void GameWindow::checkBullet()
     }
 }
 
-void GameWindow::createBullet()
+void GameWindow::createBullet(PG_Sprite* person, bool personSide)
 {
-    auto newBullet = new PG_Bullet(droid->getX());
+    auto newBullet = new PG_Bullet(person->getX(), personSide, person->getBulletColor());
     bullets.push_back(newBullet);
 
     scene->addItem(newBullet);
@@ -100,7 +143,7 @@ void GameWindow::music()
     media_playlist = new QMediaPlaylist(media_player);
 
     media_player->setPlaylist(media_playlist);
-    media_playlist->addMedia(QUrl("qrc:/StarWars/Sprites/SW.mp3"));
+    media_playlist->addMedia(QUrl("qrc:/StarWars/Resourses/Music/Star Wars - Imperial March (8-bit).mp3"));
 
     media_player->setVolume(5);
     media_playlist->setPlaybackMode(QMediaPlaylist::CurrentItemOnce);

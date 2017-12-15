@@ -55,6 +55,11 @@ void PG_StormTrooper::frameRight()
     this->update(gameRectangle);
 }
 
+bool PG_StormTrooper::getBulletColor()
+{
+    return false;
+}
+
 QVector<QPixmap *> PG_StormTrooper::loadVector(QString path)
 {
     tempSpriteImage = new QPixmap(path);

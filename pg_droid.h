@@ -13,6 +13,7 @@ private:
 
     virtual void frameLeft();
     virtual void frameRight();
+    virtual bool getBulletColor();
 
     QVector<QPixmap *> loadVector(QString path);
 
@@ -21,7 +22,7 @@ protected:
     const int startX = 50;
     const int frameHeight = 53; // y
     const int frameWidth = 36;  // x
-    const int spriteSpeed = 10;
+    const int spriteSpeed = 1;
 
     // вектор и пути
     QPixmap *tempSpriteImage;
