@@ -5,7 +5,7 @@
 
 class PG_StormTrooper : public PG_Sprite
 {
-//    Q_OBJECT
+
 public:
     explicit PG_StormTrooper(PG_Sprite *parent = nullptr);
 
@@ -21,9 +21,6 @@ private:
 protected:
     // параметры спрайта
     const int startX = 600;
-    const int frameHeight = 58; // y
-//    const int frameWidth = 45;  // x
-    const int spriteSpeed = 10;
 
     // вектор и пути
     QPixmap *tempSpriteImage;

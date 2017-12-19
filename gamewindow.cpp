@@ -29,12 +29,12 @@ GameWindow::GameWindow(QWidget *parent) :
 
     scene->addItem(droid);
     scene->addItem(stormTrooper);
-//    scene->setBackgroundBrush(pictureBackGround.scaled(windowWidth,
-//                                                       windowHeight,
-//                                                       Qt::IgnoreAspectRatio,
-//                                                       Qt::SmoothTransformation));
+    scene->setBackgroundBrush(pictureBackGround.scaled(windowWidth,
+                                                       windowHeight,
+                                                       Qt::IgnoreAspectRatio,
+                                                       Qt::SmoothTransformation));
 
-//    music();
+    music();
     startTimer(25);
 }
 
@@ -55,7 +55,7 @@ void GameWindow::keyReleaseEvent(QKeyEvent *event)
 
 void GameWindow::timerEvent(QTimerEvent *)
 {
-//    qDebug() << "List of keys" << keyboardKeys;
+    qDebug() << "List of keys" << keyboardKeys;
 
     if(keyboardKeys[Qt::Key_A])
     {
@@ -67,7 +67,18 @@ void GameWindow::timerEvent(QTimerEvent *)
         droid->frameRight();
         bulletSideDroid = true;
     }
-    if(keyboardKeys[Qt::Key_Space]) createBullet(droid, bulletSideDroid);
+    if(keyboardKeys[Qt::Key_W])
+    {
+        droid->frameUp();
+    }
+    if(keyboardKeys[Qt::Key_S])
+    {
+        droid->frameDown();
+    }
+    if(keyboardKeys[Qt::Key_Space])
+    {
+        createBulletDroid(droid, bulletSideDroid);
+    }
 
     if(keyboardKeys[Qt::Key_4])
     {
@@ -79,44 +90,68 @@ void GameWindow::timerEvent(QTimerEvent *)
         stormTrooper->frameRight();
         bulletSideStormTrooper = true;
     }
-    if(keyboardKeys[Qt::Key_Control]) createBullet(stormTrooper, bulletSideStormTrooper);
+    if(keyboardKeys[Qt::Key_8])
+    {
+        stormTrooper->frameUp();
+    }
+    if(keyboardKeys[Qt::Key_2])
+    {
+        stormTrooper->frameDown();
+    }
+    if(keyboardKeys[Qt::Key_Control])
+    {
+        createBulletStormTrooper(stormTrooper, bulletSideStormTrooper);
+    }
 
-    checkBullet();
-//    checkCollise();
+    checkBulletOutOfScreen();
+    checkCollise();
+    checkDeath();
+
+    qDebug() << droid->getHealth();
+    qDebug() << stormTrooper->getHealth();
 
     update();
 }
 
 bool GameWindow::checkHit(PG_Sprite *person, PG_Sprite *bullet)
 {
-    if ((bullet->getRightBorder() > person->getLeftBorder() && bullet->getRightBorder() < person->getRightBorder()) ||
-            (bullet->getLeftBorder() < person->getRightBorder() && bullet->getLeftBorder() > person->getLeftBorder()))
-        return true;
-    else
-        return false;
+    if (bullet->getTopBorder() > person->getTopBorder() &&
+            bullet->getBottomBorder() < person->getBottomBorder())
+    {
+        if ((bullet->getRightBorder() > person->getLeftBorder() &&
+             bullet->getRightBorder() < person->getRightBorder())
+                ||
+                (bullet->getLeftBorder() < person->getRightBorder() &&
+                 bullet->getLeftBorder() > person->getLeftBorder()))
+            return true;
+        else
+            return false;
+    }
 }
 
 void GameWindow::checkCollise()
 {
     for(auto bullet = bullets.begin(); bullet < bullets.end(); bullet++)
     {
-        auto res = checkHit(stormTrooper, (*bullet));
-        if (res)
+        resultOfHit = checkHit(stormTrooper, (*bullet));
+        if (resultOfHit)
         {
             (*bullet)->deleteLater();
             bullets.erase(bullet);
+            stormTrooper->takeDamage();
         }
 
-        res = checkHit(droid, (*bullet));
-        if (res)
+        resultOfHit = checkHit(droid, (*bullet));
+        if (resultOfHit)
         {
             (*bullet)->deleteLater();
             bullets.erase(bullet);
+            droid->takeDamage();
         }
     }
 }
 
-void GameWindow::checkBullet()
+void GameWindow::checkBulletOutOfScreen()
 {
     for(auto bullet = bullets.begin(); bullet < bullets.end(); bullet++)
     {
@@ -130,20 +165,52 @@ void GameWindow::checkBullet()
     }
 }
 
-void GameWindow::createBullet(PG_Sprite* person, bool personSide)
+void GameWindow::checkDeath()
 {
-    if(count < 5)
+    if (droid->getHealth() <= 0)
+        droid->death();
+    if (stormTrooper->getHealth() <= 0)
+        stormTrooper->death();
+}
+
+void GameWindow::createBulletDroid(PG_Sprite* person, bool personSide)
+{
+    if(countDroid < 5)
     {
-        count++;
+        countDroid++;
         return;
     }
 
-    auto newBullet = new PG_Bullet(person->getX(), personSide, person->getBulletColor());
+    int flag = -1;
+    if (personSide)
+        flag = 1;
+
+    auto newBullet = new PG_Bullet(person->getX() + 30*flag, person->getY(), personSide, person->getBulletColor());
     bullets.push_back(newBullet);
 
     scene->addItem(newBullet);
     ui->graphicsView->setScene(scene);
-    count = 0;
+    countDroid = 0;
+}
+
+void GameWindow::createBulletStormTrooper(PG_Sprite *person, bool personSide)
+{
+    if(countStormTrooper < 5)
+    {
+        countStormTrooper++;
+        return;
+    }
+
+    int flag = -1;
+    if (personSide)
+        flag = 1;
+
+    auto newBullet = new PG_Bullet(person->getX() + 30*flag, person->getY(), personSide, person->getBulletColor());
+    bullets.push_back(newBullet);
+
+    scene->addItem(newBullet);
+    ui->graphicsView->setScene(scene);
+    countStormTrooper = 0;
 }
 
 void GameWindow::music()

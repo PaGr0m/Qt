@@ -5,6 +5,7 @@
 
 class PG_Droid : public PG_Sprite
 {
+
 public:
     explicit PG_Droid(PG_Sprite *parent = nullptr);
 
@@ -20,9 +21,6 @@ private:
 protected:
     // параметры спрайта
     const int startX = 50;
-    const int frameHeight = 53; // y
-//    const int frameWidth = 36;  // x
-    const int spriteSpeed = 5;
 
     // вектор и пути
     QPixmap *tempSpriteImage;

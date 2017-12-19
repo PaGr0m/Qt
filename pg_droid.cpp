@@ -5,6 +5,7 @@ PG_Droid::PG_Droid(PG_Sprite *parent) :
     PG_Sprite(parent)
 {
     frameWidth = 36;
+    frameHeight = 53;
 
     pointCenter.setX(startX);
     pointCenter.setY(startY);    
@@ -38,7 +39,7 @@ void PG_Droid::frameLeft()
     else currentStepLeft ++;
 
     if (pointCenter.x() > windowBorderLeft)
-        pointCenter.setX(pointCenter.x() - spriteSpeed);
+        pointCenter.setX(pointCenter.x() - speed);
 
     outputSprite = vectorStepLeft.at(currentStepLeft);
 
@@ -52,7 +53,7 @@ void PG_Droid::frameRight()
     else currentStepRight ++;
 
     if (pointCenter.x() < windowBorderRight)
-        pointCenter.setX(pointCenter.x() + spriteSpeed);
+        pointCenter.setX(pointCenter.x() + speed);
 
     outputSprite = vectorStepRight.at(currentStepRight);
 

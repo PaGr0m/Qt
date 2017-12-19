@@ -3,11 +3,16 @@
 
 #include <QDebug>
 
-PG_Bullet::PG_Bullet(int x, bool side, bool color)
+PG_Bullet::PG_Bullet(int x, int y, bool side, bool color)
 {
     frameWidth = 12;
+    frameHeight = 7;
+
+//    startY = 270;
+    speed = 8;
+
     pointCenter.setX(x);
-    pointCenter.setY(startY);
+    pointCenter.setY(y);
 
     bulletSide = side;
 
@@ -18,9 +23,9 @@ PG_Bullet::PG_Bullet(int x, bool side, bool color)
 void PG_Bullet::shoot()
 {
     if (bulletSide)
-        pointCenter.setX(pointCenter.x() + bulletSpeed);
+        pointCenter.setX(pointCenter.x() + speed);
     else if (!bulletSide)
-        pointCenter.setX(pointCenter.x() - bulletSpeed);
+        pointCenter.setX(pointCenter.x() - speed);
 
     this->update(gameRectangle);
 }

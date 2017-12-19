@@ -10,5 +10,7 @@
         <file>Resourses/Music/Star Wars - Cantina (8-bit).mp3</file>
         <file>Resourses/Music/Star Wars - Imperial March (8-bit).mp3</file>
         <file>Resourses/Music/Star Wars - Main Theme (8-bit).mp3</file>
+        <file>Resourses/StormTrooper/UpLeft.png</file>
+        <file>Resourses/StormTrooper/UpRight.png</file>
     </qresource>
 </RCC>

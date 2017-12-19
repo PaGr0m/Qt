@@ -32,8 +32,11 @@ public:
 
     bool checkHit(PG_Sprite *person, PG_Sprite *bullet);
     void checkCollise();
-    void checkBullet();
-    void createBullet(PG_Sprite *person, bool personSide);
+    void checkBulletOutOfScreen();
+    void checkDeath();
+
+    void createBulletDroid(PG_Sprite *person, bool personSide);
+    void createBulletStormTrooper(PG_Sprite *person, bool personSide);
     void music();
 
 private:
@@ -71,7 +74,10 @@ private:
     // false - red
     bool bulletColor;
 
-    int count = 0;
+    // for collise
+    int countDroid = 0;
+    int countStormTrooper = 0;
+    bool resultOfHit;
 
 };
 

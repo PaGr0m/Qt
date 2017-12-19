@@ -18,17 +18,28 @@ public:
     QRectF boundingRect() const override;
 
 public:
+    virtual bool getBulletColor();
     virtual void frameLeft();
     virtual void frameRight();
-    virtual void shoot();
-    virtual bool getBulletColor();
+    virtual void frameUp();
+    virtual void frameDown();
+    virtual void death();
+    virtual void shoot();    
+
+    void takeDamage();
+    int getHealth();
 
     int getX();
+    int getY();
     int getLeftBorder();
     int getRightBorder();
+    int getTopBorder();
+    int getBottomBorder();
 
 protected:
-    const int startY = 250;
+    int startY = 250;
+    int speed = 5;
+
     int spriteCurrent;
 
     int frameHeight;
@@ -37,12 +48,15 @@ protected:
     // параметры вектора спрайтов
     int countStepLeft;
     int countStepRight;
+
     int currentStepLeft;
     int currentStepRight;
 
     // границы экрана
     const int windowBorderLeft = 0;
     const int windowBorderRight = 750;
+    const int windowBorderTop = 0;
+    const int windowVorderBottom = 500;
 
     QPixmap *tempSpriteImage;
     QPoint pointCenter;
@@ -53,6 +67,8 @@ protected:
     // true ->
     // false <-
     bool bulletSide;
+
+    int healthPoint = 100;
 };
 
 #endif // PG_SPRITE_H

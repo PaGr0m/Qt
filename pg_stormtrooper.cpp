@@ -4,6 +4,7 @@
 PG_StormTrooper::PG_StormTrooper(PG_Sprite *parent) : PG_Sprite(parent)
 {
     frameWidth = 45;
+    frameHeight = 58;
 
     pointCenter.setX(startX);
     pointCenter.setY(startY);
@@ -36,7 +37,7 @@ void PG_StormTrooper::frameLeft()
     else currentStepLeft ++;
 
     if (pointCenter.x() > windowBorderLeft)
-        pointCenter.setX(pointCenter.x() - spriteSpeed);
+        pointCenter.setX(pointCenter.x() - speed);
 
     outputSprite = vectorStepLeft.at(currentStepLeft);
 
@@ -50,7 +51,7 @@ void PG_StormTrooper::frameRight()
     else currentStepRight ++;
 
     if (pointCenter.x() < windowBorderRight)
-        pointCenter.setX(pointCenter.x() + spriteSpeed);
+        pointCenter.setX(pointCenter.x() + speed);
 
     outputSprite = vectorStepRight.at(currentStepRight);
 
