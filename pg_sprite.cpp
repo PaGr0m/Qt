@@ -8,11 +8,7 @@ PG_Sprite::PG_Sprite(QObject *parent) : QObject(parent)
 
 void PG_Sprite::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-//    painter->drawPixmap(pointCenter.x(),
-//                        pointCenter.y(),
-//                        *spriteVector.at(spriteCurrent));
-//    Q_UNUSED(option);
-//    Q_UNUSED(widget);
+
 }
 
 void PG_Sprite::frameLeft()
@@ -37,7 +33,18 @@ bool PG_Sprite::getBulletColor()
 
 int PG_Sprite::getX()
 {
+//    return pointCenter.x() + frameWidth/2;
+    return pointCenter.x() + frameWidth/2;
+}
+
+int PG_Sprite::getLeftBorder()
+{
     return pointCenter.x();
+}
+
+int PG_Sprite::getRightBorder()
+{
+    return pointCenter.x() + frameWidth;
 }
 
 QRectF PG_Sprite::boundingRect() const

@@ -13,13 +13,11 @@ public:
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     virtual void shoot();
 
-    void slotTimerBullet();
-
 protected:
     // параметры спрайта
     const int frameHeight = 7; // y
-    const int frameWidth = 12;  // x
-    const int bulletSpeed = 11;
+//    const int frameWidth = 12;  // x
+    const int bulletSpeed = 5;
     const int startY = 270;
 
     // вектор и путь

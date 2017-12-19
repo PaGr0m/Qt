@@ -3,6 +3,8 @@
 
 PG_StormTrooper::PG_StormTrooper(PG_Sprite *parent) : PG_Sprite(parent)
 {
+    frameWidth = 45;
+
     pointCenter.setX(startX);
     pointCenter.setY(startY);
 

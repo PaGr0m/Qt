@@ -21,8 +21,8 @@ protected:
     // параметры спрайта
     const int startX = 50;
     const int frameHeight = 53; // y
-    const int frameWidth = 36;  // x
-    const int spriteSpeed = 1;
+//    const int frameWidth = 36;  // x
+    const int spriteSpeed = 5;
 
     // вектор и пути
     QPixmap *tempSpriteImage;

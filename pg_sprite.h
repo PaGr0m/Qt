@@ -24,6 +24,8 @@ public:
     virtual bool getBulletColor();
 
     int getX();
+    int getLeftBorder();
+    int getRightBorder();
 
 protected:
     const int startY = 250;

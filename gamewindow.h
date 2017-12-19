@@ -10,6 +10,9 @@
 #include <QMediaPlaylist>
 
 #include "pg_sprite.h"
+#include "pg_droid.h"
+#include "pg_stormtrooper.h"
+#include "pg_bullet.h"
 
 namespace Ui {
 class GameWindow;
@@ -27,7 +30,8 @@ public:
     void keyReleaseEvent(QKeyEvent *event);
     void timerEvent(QTimerEvent *);
 
-    bool checkCol(QPointF person, QPointF bullet);
+    bool checkHit(PG_Sprite *person, PG_Sprite *bullet);
+    void checkCollise();
     void checkBullet();
     void createBullet(PG_Sprite *person, bool personSide);
     void music();
@@ -66,6 +70,8 @@ private:
     // true - blue
     // false - red
     bool bulletColor;
+
+    int count = 0;
 
 };
 

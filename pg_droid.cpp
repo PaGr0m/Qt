@@ -1,8 +1,11 @@
 #include "pg_droid.h"
 #include <QDebug>
 
-PG_Droid::PG_Droid(PG_Sprite *parent) : PG_Sprite(parent)
+PG_Droid::PG_Droid(PG_Sprite *parent) :
+    PG_Sprite(parent)
 {
+    frameWidth = 36;
+
     pointCenter.setX(startX);
     pointCenter.setY(startY);    
 

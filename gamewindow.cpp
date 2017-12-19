@@ -81,37 +81,39 @@ void GameWindow::timerEvent(QTimerEvent *)
     }
     if(keyboardKeys[Qt::Key_Control]) createBullet(stormTrooper, bulletSideStormTrooper);
 
-//    droid->mapRectFromItem();
     checkBullet();
-    for(auto b: bullets)
-    {
-        auto res = checkCol(stormTrooper->pos(), b->pos());
-        qDebug() << res;
-        if (res)
-        {
-//            b->deleteLater();
-//            bullets.erase(*b);
-            qDebug() << "Попал";
-        }
-    }
+//    checkCollise();
 
     update();
 }
 
-bool GameWindow::checkCol(QPointF person, QPointF bullet)
+bool GameWindow::checkHit(PG_Sprite *person, PG_Sprite *bullet)
 {
-    if (bullet.x() == person.x())
+    if ((bullet->getRightBorder() > person->getLeftBorder() && bullet->getRightBorder() < person->getRightBorder()) ||
+            (bullet->getLeftBorder() < person->getRightBorder() && bullet->getLeftBorder() > person->getLeftBorder()))
         return true;
     else
         return false;
+}
 
-//    if (bullet.x() > person.x() &&
-//        bullet.x() < (person.x() + person.width()))
-//        return true;
-//    else if ((bullet.x() + bullet.width()) > person.x() &&
-//             (bullet.x() + bullet.width()) < (person.x() + person.width()))
-//        return true;
-//    else return false;
+void GameWindow::checkCollise()
+{
+    for(auto bullet = bullets.begin(); bullet < bullets.end(); bullet++)
+    {
+        auto res = checkHit(stormTrooper, (*bullet));
+        if (res)
+        {
+            (*bullet)->deleteLater();
+            bullets.erase(bullet);
+        }
+
+        res = checkHit(droid, (*bullet));
+        if (res)
+        {
+            (*bullet)->deleteLater();
+            bullets.erase(bullet);
+        }
+    }
 }
 
 void GameWindow::checkBullet()
@@ -130,11 +132,18 @@ void GameWindow::checkBullet()
 
 void GameWindow::createBullet(PG_Sprite* person, bool personSide)
 {
+    if(count < 5)
+    {
+        count++;
+        return;
+    }
+
     auto newBullet = new PG_Bullet(person->getX(), personSide, person->getBulletColor());
     bullets.push_back(newBullet);
 
     scene->addItem(newBullet);
     ui->graphicsView->setScene(scene);
+    count = 0;
 }
 
 void GameWindow::music()

@@ -22,7 +22,7 @@ protected:
     // параметры спрайта
     const int startX = 600;
     const int frameHeight = 58; // y
-    const int frameWidth = 45;  // x
+//    const int frameWidth = 45;  // x
     const int spriteSpeed = 10;
 
     // вектор и пути
