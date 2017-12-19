@@ -1,5 +1,4 @@
 #include "pg_stormtrooper.h"
-#include <QDebug>
 
 PG_StormTrooper::PG_StormTrooper(PG_Sprite *parent) : PG_Sprite(parent)
 {

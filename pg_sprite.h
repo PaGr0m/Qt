@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QDebug>
 
 class PG_Sprite : public QObject, public QGraphicsItem
 {
@@ -64,8 +65,7 @@ protected:
     QVector<QPixmap *> spriteVector;
 
     // направление пулей
-    // true ->
-    // false <-
+    // true ->, false <-
     bool bulletSide;
 
     int healthPoint = 100;

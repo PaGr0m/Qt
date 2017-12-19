@@ -1,10 +1,6 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
 
-#include "pg_droid.h"
-#include "pg_stormtrooper.h"
-#include "pg_bullet.h"
-
 GameWindow::GameWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GameWindow)

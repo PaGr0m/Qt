@@ -1,5 +1,4 @@
 #include "pg_droid.h"
-#include <QDebug>
 
 PG_Droid::PG_Droid(PG_Sprite *parent) :
     PG_Sprite(parent)

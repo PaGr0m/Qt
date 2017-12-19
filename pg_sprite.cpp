@@ -1,5 +1,5 @@
 #include "pg_sprite.h"
-#include <QDebug>
+
 
 PG_Sprite::PG_Sprite(QObject *parent) : QObject(parent)
 {

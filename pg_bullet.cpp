@@ -1,14 +1,11 @@
 #include "pg_bullet.h"
 #include "pg_sprite.h"
 
-#include <QDebug>
-
 PG_Bullet::PG_Bullet(int x, int y, bool side, bool color)
 {
     frameWidth = 12;
     frameHeight = 7;
 
-//    startY = 270;
     speed = 8;
 
     pointCenter.setX(x);

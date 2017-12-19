@@ -2,7 +2,6 @@
 #define PG_BULLET_H
 
 #include "pg_sprite.h"
-#include <QTimer>
 
 class PG_Bullet : public PG_Sprite
 {
